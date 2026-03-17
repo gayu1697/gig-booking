@@ -1396,7 +1396,10 @@ let showFilter  = 'all';
 async function apiGet(params) {
   if (CONFIG.DEMO_MODE) return null;
   const qs  = new URLSearchParams(params).toString();
-  const res = await fetch(`${CONFIG.API_URL}?${qs}`);
+  const res = await fetch(`${CONFIG.API_URL}?${qs}`, {
+    method: 'GET',
+    redirect: 'follow'
+  });
   return res.json();
 }
 
@@ -1404,8 +1407,9 @@ async function apiPost(body) {
   if (CONFIG.DEMO_MODE) return null;
   const res = await fetch(CONFIG.API_URL, {
     method: 'POST',
+    redirect: 'follow',
     body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'text/plain' }
   });
   return res.json();
 }
